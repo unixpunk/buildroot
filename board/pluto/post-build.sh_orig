@@ -4,11 +4,6 @@
 
 INSTALL=install
 
-####################
-# Create and insert the update.zip.md5sum
-/home/steve/Desktop/SDR/Pluto/PlutoSDR/plutoweb/buildzip.sh
-cp /home/steve/Desktop/SDR/Pluto/PlutoSDR/plutoweb/update.zip.md5sum ${TARGET_DIR}/root/.update.zip.md5sum
-
 # Add a console on tty1
 grep -qE '^ttyGS0::' ${TARGET_DIR}/etc/inittab || \
 sed -i '/GENERIC_SERIAL/a\
@@ -37,7 +32,7 @@ genimage                           \
 rm ${TARGET_DIR}/opt/boot.vfat
 rm ${TARGET_DIR}/etc/init.d/S99iiod
 
-#mkdir -p ${TARGET_DIR}/www/img
+mkdir -p ${TARGET_DIR}/www/img
 mkdir -p ${TARGET_DIR}/etc/wpa_supplicant/
 
 ${INSTALL} -D -m 0755 ${BOARD_DIR}/update.sh ${TARGET_DIR}/sbin/
@@ -61,8 +56,8 @@ ${INSTALL} -D -m 0755 ${BOARD_DIR}/automounter.sh ${TARGET_DIR}/lib/mdev/automou
 ${INSTALL} -D -m 0755 ${BOARD_DIR}/ifupdown.sh ${TARGET_DIR}/lib/mdev/ifupdown.sh
 ${INSTALL} -D -m 0644 ${BOARD_DIR}/input-event-daemon.conf ${TARGET_DIR}/etc/
 
-#${INSTALL} -D -m 0644 ${BOARD_DIR}/msd/img/* ${TARGET_DIR}/www/img/
-#${INSTALL} -D -m 0644 ${BOARD_DIR}/msd/index.html ${TARGET_DIR}/www/
+${INSTALL} -D -m 0644 ${BOARD_DIR}/msd/img/* ${TARGET_DIR}/www/img/
+${INSTALL} -D -m 0644 ${BOARD_DIR}/msd/index.html ${TARGET_DIR}/www/
 
 ${INSTALL} -D -m 0755 ${BOARD_DIR}/wpa_supplicant/* ${TARGET_DIR}/etc/wpa_supplicant/
 

@@ -23,9 +23,9 @@ create_system_files () {
 	ETH_IPADDR=`fw_printenv -n ipaddr_eth 2> /dev/null`
 	ETH_NETMASK=`fw_printenv -n netmask_eth 2> /dev/null || echo 255.255.255.0`
 
-	WLAN_SSID=`fw_printenv -n ssid_wlan 2> /dev/null || echo PlutoWeb`
+	WLAN_SSID=`fw_printenv -n ssid_wlan 2> /dev/null`
 	WLAN_PWD=`fw_printenv -n pwd_wlan 2> /dev/null`
-	WLAN_IPADDR=`fw_printenv -n ipaddr_wlan 2> /dev/null || echo 172.20.0.1`
+	WLAN_IPADDR=`fw_printenv -n ipaddr_wlan 2> /dev/null`
 
 	XO_CORRECTION=`fw_printenv -n xo_correction 2> /dev/null`
 	UDC_HANDLE_SUSPEND=`fw_printenv -n udc_handle_suspend 2> /dev/null || echo 0`
@@ -34,21 +34,11 @@ create_system_files () {
 	echo "start $IPADDR_HOST" > $UDHCPD_CONF
 	echo "interface usb0" >> $UDHCPD_CONF
 	echo "option subnet $NETMASK" >> $UDHCPD_CONF
-	if [ -e /dev/wlan0 ]; then
-		echo "start $WLAN_IPADDR""0" > $UDHCPD_CONF
-		echo "interface wlan0" >> $UDHCPD_CONF
-		echo "option subnet $NETMASK" >> $UDHCPD_CONF
-	fi
 
 	### /etc/network/interfaces ###
 	echo -e "auto lo\n""iface lo inet loopback\n" > $IFAC
-	if [ -e /dev/wlan0 ]; then
-		echo -e "auto wlan0\n""iface wlan0 inet static" >> $IFAC
-		echo -e "\taddress $WLAN_IPADDR\n""\tnetmask $NETMASK\n" >> $IFAC
-	else
-		echo -e "auto usb0\n""iface usb0 inet static" >> $IFAC
-		echo -e "\taddress $IPADDR\n""\tnetmask $NETMASK\n" >> $IFAC
-	fi
+	echo -e "auto usb0\n""iface usb0 inet static" >> $IFAC
+	echo -e "\taddress $IPADDR\n""\tnetmask $NETMASK\n" >> $IFAC
 
 	echo -e "auto eth0" >> $IFAC
 	if [ -n "$ETH_IPADDR" ]
@@ -68,13 +58,19 @@ create_system_files () {
 		else
 			echo "network={" > /etc/wpa.conf
 			echo "    ssid=\"$WLAN_SSID\"" >> /etc/wpa.conf
-			if [ "$WLAN_SSID" = "PlutoWeb" ]; then
-				echo "    mode=2" >> /etc/wpa.conf
-			fi
 			echo "    key_mgmt=NONE" >> /etc/wpa.conf
 			echo "}" >> /etc/wpa.conf
 		fi
 
+		echo -e "auto wlan0" >> $IFAC
+
+		if [ -n "$WLAN_IPADDR" ]
+		then
+			echo -e "iface wlan0 inet static" >> $IFAC
+			echo -e "\taddress $WLAN_IPADDR\n""\tnetmask 255.255.255.0" >> $IFAC
+		else
+			echo -e "iface wlan0 inet dhcp" >> $IFAC
+		fi
 		echo -e "\twpa-conf /etc/wpa.conf\n" >> $IFAC
 	fi
 
@@ -110,7 +106,7 @@ create_system_files () {
 
 	### /www/index.html ###
 
-	#sed -i -e "s/#IP#/$IPADDR/g" -e "s/#HOSTIP#/$IPADDR_HOST/g" -e "s/#NETMASK#/$NETMASK/g" -e "s/#HOSTNAME#/$HOSTNAME/g" -e "s/#SSID_WLAN#/$WLAN_SSID/g" -e "s/#IPADDR_WLAN#/$WLAN_IPADDR/g" -e "s/#IPADDR_ETH#/$ETH_IPADDR/g" -e "s/#NETMASK_ETH#/$ETH_NETMASK/g" /www/index.html /www/img/index_*.html
+	sed -i -e "s/#IP#/$IPADDR/g" -e "s/#HOSTIP#/$IPADDR_HOST/g" -e "s/#NETMASK#/$NETMASK/g" -e "s/#HOSTNAME#/$HOSTNAME/g" -e "s/#SSID_WLAN#/$WLAN_SSID/g" -e "s/#IPADDR_WLAN#/$WLAN_IPADDR/g" -e "s/#IPADDR_ETH#/$ETH_IPADDR/g" -e "s/#NETMASK_ETH#/$ETH_NETMASK/g" /www/index.html /www/img/index_*.html
 
 	}
 
