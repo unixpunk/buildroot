@@ -209,6 +209,10 @@ do
 		rm /opt/$TARGET-fw-*.zip
 	fi
 
+	if [[ -s /mnt/update.zip ]]; then
+		mv /mnt/update.zip /root/
+	fi
+
 	if [[ -s ${FIRMWARE} ]]
 	then 
 		handle_frimware_frm ${FIRMWARE} ${FRM_MAGIC}
