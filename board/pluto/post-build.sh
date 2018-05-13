@@ -6,7 +6,7 @@ INSTALL=install
 
 ####################
 # Create and insert the update.zip.md5sum
-/home/steve/Desktop/SDR/Pluto/PlutoWeb/plutoweb/buildzip.sh
+/home/steve/Desktop/SDR/Pluto/plutosdr-fw/buildroot/board/pluto/buildzip.sh
 cp /home/steve/Desktop/SDR/Pluto/PlutoWeb/plutoweb/update.zip.md5sum ${TARGET_DIR}/root/.update.zip.md5sum
 
 # Add a console on tty1
