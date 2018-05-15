@@ -77,6 +77,8 @@ calibrate () {
 process_ini() {
 	FILE=$1
 
+	ini_parser $FILE "PlutoWeb"
+	ini_parser $FILE "OpenWebRx"
 	ini_parser $FILE "NETWORK"
 	ini_parser $FILE "WLAN"
 	ini_parser $FILE "SYSTEM"
@@ -99,8 +101,18 @@ process_ini() {
 		echo "udc_handle_suspend $udc_handle_suspend" >> /opt/fw_set.tmp
 		echo "ipaddr_eth $ipaddr_eth" >> /opt/fw_set.tmp
 		echo "netmask_eth $netmask_eth" >> /opt/fw_set.tmp
+		echo "autostart $autostart" >> /opt/fw_set.tmp
+		echo "autoreboot $autoreboot" >> /opt/fw_set.tmp
+		echo "autoupdate $autoupdate" >> /opt/fw_set.tmp
+		echo "center_freq $center_freq" >> /opt/fw_set.tmp
+		echo "start_freq $start_freq" >> /opt/fw_set.tmp
+		echo "samp_rate $samp_rate" >> /opt/fw_set.tmp
+		echo "start_mod $start_mod" >> /opt/fw_set.tmp
+		echo "rf_gain $rf_gain" >> /opt/fw_set.tmp
+		echo "ppm $ppm" >> /opt/fw_set.tmp
 		fw_setenv -s /opt/fw_set.tmp
-		rm /opt/fw_set.tmp
+		rm /opt/fw_set.tmp /root/temp-settings
+		/etc/init.d/S95autostart restart
 		flash_indication_off
 		touch /mnt/SUCCESS_ENV_UPDATE
 	else

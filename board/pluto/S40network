@@ -6,6 +6,7 @@
 # Debian ifupdown needs the /run/network lock directory
 
 source /etc/device_config
+. /bin/readsettings.sh >/dev/null
 
 create_system_files () {
 
@@ -81,6 +82,19 @@ create_system_files () {
 	### /opt/config.txt ###
 	echo "# Device Configuration File"$'\r' > $CONF
 	echo "# Edit, Save and then Eject the USB Drive"$'\r' >> $CONF
+	echo ""$'\r'>> $CONF
+	echo "[PlutoWeb]"$'\r' >> $CONF
+	echo "autostart = $autostart"$'\r' >> $CONF
+	echo "autoreboot = $autoreboot"$'\r' >> $CONF
+	echo "autoupdate = $autoupdate"$'\r' >> $CONF
+	echo ""$'\r' >> $CONF
+	echo "[OpenWebRx]"$'\r' >> $CONF
+	echo "center_freq = $center_freq"$'\r' >> $CONF
+	echo "start_freq = $start_freq"$'\r' >> $CONF
+	echo "samp_rate = $samp_rate"$'\r' >> $CONF
+	echo "start_mod = $start_mod"$'\r' >> $CONF
+	echo "rf_gain = $rf_gain"$'\r' >> $CONF
+	echo "ppm = $ppm"$'\r' >> $CONF
 	echo ""$'\r'>> $CONF
 	echo "[NETWORK]"$'\r' >> $CONF
 	echo "hostname = $HOSTNAME"$'\r' >> $CONF
