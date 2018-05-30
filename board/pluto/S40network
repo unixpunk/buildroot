@@ -88,7 +88,7 @@ create_system_files () {
 	echo "autoreboot = $autoreboot"$'\r' >> $CONF
 	echo "autoupdate = $autoupdate"$'\r' >> $CONF
 	echo ""$'\r' >> $CONF
-	echo "[OpenWebRx]"$'\r' >> $CONF
+	echo "[OpenWebRX]"$'\r' >> $CONF
 	echo "center_freq = $center_freq"$'\r' >> $CONF
 	echo "start_freq = $start_freq"$'\r' >> $CONF
 	echo "samp_rate = $samp_rate"$'\r' >> $CONF
