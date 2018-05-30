@@ -79,7 +79,7 @@ process_ini() {
 
 	ini_parser $FILE "PlutoWeb"
 	ini_parser $FILE "OpenWebRX"
-	ini_parser $FILE "SDR.HU"
+	ini_parser $FILE "SDRHU"
 	ini_parser $FILE "NETWORK"
 	ini_parser $FILE "WLAN"
 	ini_parser $FILE "SYSTEM"
