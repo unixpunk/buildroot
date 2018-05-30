@@ -95,21 +95,21 @@ create_system_files () {
 	echo "start_mod = $start_mod"$'\r' >> $CONF
 	echo "rf_gain = $rf_gain"$'\r' >> $CONF
 	echo "ppm = $ppm"$'\r' >> $CONF
-	echo "web_port=$web_port"$'\r' >> $CONF
-	echo "max_clients=$max_clients"$'\r' >> $CONF
-	echo "fft_fps=$fft_fps"$'\r' >> $CONF
-	echo "fft_size=$fft_size"$'\r' >> $CONF
-	echo "fft_voverlap_factor=$fft_voverlap_factor"$'\r' >> $CONF
+	echo "web_port = $web_port"$'\r' >> $CONF
+	echo "max_clients = $max_clients"$'\r' >> $CONF
+	echo "fft_fps = $fft_fps"$'\r' >> $CONF
+	echo "fft_size = $fft_size"$'\r' >> $CONF
+	echo "fft_voverlap_factor = $fft_voverlap_factor"$'\r' >> $CONF
 	echo ""$'\r' >> $CONF
 	echo "[SDRHU]"$'\r' >> $CONF
-	echo "receiver_location=$receiver_location"$'\r' >> $CONF
-	echo "receiver_qra=$receiver_qra"$'\r' >> $CONF
-	echo "receiver_asl=$receiver_asl"$'\r' >> $CONF
-	echo "receiver_ant=$receiver_ant"$'\r' >> $CONF
-	echo "receiver_admin=$receiver_admin"$'\r' >> $CONF
-	echo "receiver_gps=$receiver_gps"$'\r' >> $CONF
-	echo "sdrhu_key=$sdrhu_key"$'\r' >> $CONF
-	echo "sdrhu_public_listing=$sdrhu_public_listing"$'\r' >> $CONF
+	echo "receiver_location = $receiver_location"$'\r' >> $CONF
+	echo "receiver_qra = $receiver_qra"$'\r' >> $CONF
+	echo "receiver_asl = $receiver_asl"$'\r' >> $CONF
+	echo "receiver_ant = $receiver_ant"$'\r' >> $CONF
+	echo "receiver_admin = $receiver_admin"$'\r' >> $CONF
+	echo "receiver_gps = $receiver_gps"$'\r' >> $CONF
+	echo "sdrhu_key = $sdrhu_key"$'\r' >> $CONF
+	echo "sdrhu_public_listing = $sdrhu_public_listing"$'\r' >> $CONF
 	echo ""$'\r'>> $CONF
 	echo "[NETWORK]"$'\r' >> $CONF
 	echo "hostname = $HOSTNAME"$'\r' >> $CONF
