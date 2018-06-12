@@ -102,6 +102,7 @@ create_system_files () {
 	echo "fft_voverlap_factor = $fft_voverlap_factor"$'\r' >> $CONF
 	echo ""$'\r' >> $CONF
 	echo "[SDRHU]"$'\r' >> $CONF
+	echo "receiver_name = $receiver_name"$'\r' >> $CONF
 	echo "receiver_location = $receiver_location"$'\r' >> $CONF
 	echo "receiver_qra = $receiver_qra"$'\r' >> $CONF
 	echo "receiver_asl = $receiver_asl"$'\r' >> $CONF

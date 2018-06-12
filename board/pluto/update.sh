@@ -113,10 +113,11 @@ process_ini() {
 		echo "ppm $ppm" >> /opt/fw_set.tmp
 		echo "web_port $web_port" >> /opt/fw_set.tmp
 		echo "max_clients $max_clients" >> /opt/fw_set.tmp
-		echo "receiver_location $receiver_location" >> /opt/fw_set.tmp
+		echo "receiver_name \"$receiver_name\"" >> /opt/fw_set.tmp
+		echo "receiver_location \"$receiver_location\"" >> /opt/fw_set.tmp
 		echo "receiver_qra $receiver_qra" >> /opt/fw_set.tmp
 		echo "receiver_asl $receiver_asl" >> /opt/fw_set.tmp
-		echo "receiver_ant $receiver_ant" >> /opt/fw_set.tmp
+		echo "receiver_ant \"$receiver_ant\"" >> /opt/fw_set.tmp
 		echo "receiver_admin $receiver_admin" >> /opt/fw_set.tmp
 		echo "receiver_gps $receiver_gps" >> /opt/fw_set.tmp
 		echo "fft_fps $fft_fps" >> /opt/fw_set.tmp
