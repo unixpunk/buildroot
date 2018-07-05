@@ -126,7 +126,7 @@ process_ini() {
 		echo "sdrhu_key $sdrhu_key" >> /opt/fw_set.tmp
 		echo "sdrhu_public_listing $sdrhu_public_listing" >> /opt/fw_set.tmp
 		fw_setenv -s /opt/fw_set.tmp
-		rm /opt/fw_set.tmp /root/temp-settings
+		rm /opt/fw_set.tmp /root/plutoweb.conf
 		/etc/init.d/S95autostart restart
 		flash_indication_off
 		touch /mnt/SUCCESS_ENV_UPDATE
