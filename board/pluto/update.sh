@@ -229,15 +229,15 @@ do
 	losetup /dev/loop7 $img -o 512
 	mount /dev/loop7 /mnt
 
-	if [[ -s /mnt/$TARGET-fw-*.zip ]]
+	if [[ -s /mnt/$TARGET-fw-*.tgz ]]
 	then
-		mv /mnt/$TARGET-fw-*.zip /opt/
-		unzip -o /opt/$TARGET-fw-*.zip *.frm -d /mnt
-		rm /opt/$TARGET-fw-*.zip
+		mv /mnt/$TARGET-fw-*.tgz /opt/
+		cd /mnt && gzip -dc /opt/$TARGET-fw-*.tgz | tar -cf - *.frm
+		rm /opt/$TARGET-fw-*.tgz
 	fi
 
-	if [[ -s /mnt/update.zip ]]; then
-		mv /mnt/update.zip /root/
+	if [[ -s /mnt/update.tgz ]]; then
+		mv /mnt/update.tgz /root/
 	fi
 
 	if [[ -s ${FIRMWARE} ]]
