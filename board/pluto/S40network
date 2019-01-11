@@ -100,6 +100,7 @@ create_system_files () {
 	echo "fft_fps = $fft_fps"$'\r' >> $CONF
 	echo "fft_size = $fft_size"$'\r' >> $CONF
 	echo "fft_voverlap_factor = $fft_voverlap_factor"$'\r' >> $CONF
+	echo "openwebrx_override = $openwebrx_override"$'\r' >> $CONF
 	echo ""$'\r' >> $CONF
 	echo "[SDRHU]"$'\r' >> $CONF
 	echo "receiver_name = $receiver_name"$'\r' >> $CONF
