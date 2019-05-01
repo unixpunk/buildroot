@@ -237,8 +237,8 @@ do
 		rm /opt/$TARGET-fw-*.tgz
 	fi
 
-	if [[ -s /mnt/update.tgz ]]; then
-		mv /mnt/update.tgz /root/
+	if [[ -s /mnt/update3.* ]]; then
+		mv /mnt/update3.* /root/
 	fi
 
 	if [[ -s ${FIRMWARE} ]]
