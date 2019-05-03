@@ -1,5 +1,9 @@
 #!/bin/sh
 
+mkdir /tmp/Transfer
+touch /tmp/Transfer/FILES_TO_TRANSFER_TO_USB_250MB_LIMIT
+ln -s /tmp/Transfer /root/SendToUSB
+
 source /etc/device_config
 
 file=/sys/kernel/config/usb_gadget/composite_gadget/functions/mass_storage.0/lun.0/file
@@ -241,10 +245,19 @@ do
 		mv /mnt/update3.* /root/
 	fi
 
-	if [[ -s /mnt/Transfer/* ]]; then
+	if [[ $(ls -1 /mnt/Transfer/ | wc -l) -gt 1 ]]; then
 		mkdir /tmp/Transfered
+		rm /mnt/Transfer/DROP_FILES_HERE_250MB_LIMIT
 		mv /mnt/Transfer/* /tmp/Transfered/
+		touch /mnt/Transfer/DROP_FILES_HERE_250MB_LIMIT
 		ln -s /tmp/Transfered /root/Transfered
+	fi
+
+	if [[ $(ls -1 /tmp/Transfer/ | wc -l) -gt 1 ]]; then
+		mkdir /mnt/Transfered
+		rm /tmp/Transfer/FILES_TO_TRANSFER_TO_USB_250MB_LIMIT
+		mv /tmp/Transfer/* /mnt/Transfered/
+		touch /tmp/Transfer/FILES_TO_TRANSFER_TO_USB_250MB_LIMIT
 	fi
 
 	if [[ -s ${FIRMWARE} ]]
