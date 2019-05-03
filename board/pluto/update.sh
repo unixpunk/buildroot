@@ -241,6 +241,12 @@ do
 		mv /mnt/update3.* /root/
 	fi
 
+	if [[ -s /mnt/Transfer/* ]]; then
+		mkdir /tmp/Transfered
+		mv /mnt/Transfer/* /tmp/Transfered/
+		ln -s /tmp/Transfered /root/Transfered
+	fi
+
 	if [[ -s ${FIRMWARE} ]]
 	then 
 		handle_frimware_frm "${FIRMWARE}" "${FRM_MAGIC}"
