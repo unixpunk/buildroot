@@ -246,17 +246,17 @@ do
 	fi
 
 	if [[ $(ls -1 /mnt/Transfer/ | wc -l) -gt 1 ]]; then
-		mkdir /tmp/Transfered
+		mkdir /tmp/Transferred
 		rm /mnt/Transfer/DROP_FILES_HERE_250MB_LIMIT
-		mv /mnt/Transfer/* /tmp/Transfered/
+		mv /mnt/Transfer/* /tmp/Transferred/
 		touch /mnt/Transfer/DROP_FILES_HERE_250MB_LIMIT
-		ln -s /tmp/Transfered /root/Transfered
+		ln -s /tmp/Transferred /root/Transferred
 	fi
 
 	if [[ $(ls -1 /tmp/Transfer/ | wc -l) -gt 1 ]]; then
-		mkdir /mnt/Transfered
+		mkdir /mnt/Transferred
 		rm /tmp/Transfer/FILES_TO_TRANSFER_TO_USB_250MB_LIMIT
-		mv /tmp/Transfer/* /mnt/Transfered/
+		mv /tmp/Transfer/* /mnt/Transferred/
 		touch /tmp/Transfer/FILES_TO_TRANSFER_TO_USB_250MB_LIMIT
 	fi
 
