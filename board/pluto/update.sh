@@ -2,7 +2,7 @@
 
 mkdir /tmp/Transfer
 touch /tmp/Transfer/FILES_TO_TRANSFER_TO_USB_250MB_LIMIT
-ln -s /tmp/Transfer /root/SendToUSB
+ln -s /tmp/Transfer /root/Transfer
 
 source /etc/device_config
 
@@ -307,6 +307,9 @@ do
 fi
 
 sleep 1
+
+[ -b /dev/sda1 ] && [ ! -d /usb ] && { mkdir /usb; mount /dev/sda1 /usb; }
+[ -d /usb ] && [ ! -b /dev/sda1 ] && rm -r /usb
 
 done
 
