@@ -308,8 +308,9 @@ fi
 
 sleep 1
 
-[ -b /dev/sda1 ] && [ ! -d /usb ] && { mkdir /usb; mount /dev/sda1 /usb; }
+# PlutoWeb automounter
 [ -d /usb ] && [ ! -b /dev/sda1 ] && rm -r /usb
+[ -b /dev/sda1 ] && [ ! -d /usb ] && /bin/usbmounter.sh
 
 done
 
