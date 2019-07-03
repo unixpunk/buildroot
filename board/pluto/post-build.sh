@@ -1,6 +1,7 @@
 #!/bin/sh
 # args from BR2_ROOTFS_POST_SCRIPT_ARGS
 # $2    board name
+. ${BR2_CONFIG}
 set -e
 
 INSTALL=install
@@ -25,6 +26,16 @@ BOARD_DIR="$(dirname $0)"
 BOARD_NAME="$(basename ${BOARD_DIR})"
 GENIMAGE_CFG="${BOARD_DIR}/genimage-msd.cfg"
 GENIMAGE_TMP="${BUILD_DIR}/genimage.tmp"
+GCC_VERSION=$(${BR2_TOOLCHAIN_EXTERNAL_PREFIX}-gcc --version | head -1 | sed 's/.*(\(.*\))/\1/')
+BIN_VERSION=$(${BR2_TOOLCHAIN_EXTERNAL_PREFIX}-as --version | head -1 | sed 's/.*(\(.*\))/\1/')
+GCC_TRIPLE=$(${BR2_TOOLCHAIN_EXTERNAL_PREFIX}-gcc -v -c  2>&1 | sed 's/ /\n/g' | grep -e "--target" | awk -F= '{print $2}')
+if [ "$BR2_TARGET_GENERIC_ROOT_PASSWD" = "analog" ] ; then
+	ROOTPASSWD=$BR2_TARGET_GENERIC_ROOT_PASSWD;
+else
+	ROOTPASSWD="********"
+fi
+
+sed -e "s/#GCC_TRIPLE#/$GCC_TRIPLE/g" -e "s/#GCC_VERSION#/$GCC_VERSION/g" -e "s/#BIN_VERSION#/$BIN_VERSION/g" ${BOARD_DIR}/index.html -e "s/#ROOTPASSWORD#/$ROOTPASSWD/g" > ${BOARD_DIR}/msd/index.html
 
 rm -rf "${GENIMAGE_TMP}"
 
@@ -63,8 +74,8 @@ ${INSTALL} -D -m 0755 ${BOARD_DIR}/automounter.sh ${TARGET_DIR}/lib/mdev/automou
 ${INSTALL} -D -m 0755 ${BOARD_DIR}/ifupdown.sh ${TARGET_DIR}/lib/mdev/ifupdown.sh
 ${INSTALL} -D -m 0644 ${BOARD_DIR}/input-event-daemon.conf ${TARGET_DIR}/etc/
 
-#${INSTALL} -D -m 0644 ${BOARD_DIR}/msd/img/* ${TARGET_DIR}/www/img/
-#${INSTALL} -D -m 0644 ${BOARD_DIR}/msd/index.html ${TARGET_DIR}/www/
+${INSTALL} -D -m 0644 ${BOARD_DIR}/msd/img/* ${TARGET_DIR}/www/img/
+${INSTALL} -D -m 0644 ${BOARD_DIR}/msd/*.html ${TARGET_DIR}/www/
 
 ${INSTALL} -D -m 0755 ${BOARD_DIR}/wpa_supplicant/* ${TARGET_DIR}/etc/wpa_supplicant/
 
